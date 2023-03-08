@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+		<title>LOGIN</title>
+		<link rel="stylesheet" href="./css/styles.css" />
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+			</header>
+		</div>
+		<div class="container">
+			<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			  <div class="container-fluid">
+			    <a class="navbar-brand" href="#">Navbar</a>
+			    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			      <span class="navbar-toggler-icon"></span>
+			    </button>
+			
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+      				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				      <li class="nav-item active">
+				        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				      </li>
+				    </ul>
+				    <form class="d-flex" role="search">
+				      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				    </form>
+			        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+				  </div>
+			</nav>
+		</div>
+		<div class="container">
+			<div class="row">
+			    <div class="col-4">
+			    	Category tree
+			    </div>
+			    <div class="col-8">
+			    	<div class="flex-container">
+				    	<div class="card">
+						  <img src="..." class="card-img-top" alt="...">
+						  <div class="card-body">
+						    <h5 class="card-title">[TITLE]</h5>
+						    <p class="card-text">[DESC]</p>
+						    <a href="#" class="btn btn-primary">Agregar al carrito</a>
+						  </div>
+						</div>
+					</div>
+			    </div>
+			</div>
+		</div>
+		<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <form id="form-login" th:action="@{/login/}" th:object="${userLoginModel}" method="POST">
+				  <div class="form-group">
+				    <label for="username">Usuario</label>
+				    <input type="text" class="form-control" id="username" placeholder="Ingresar usuario"  th:field="*{username}">
+				  </div>
+				  <div class="form-group">
+				    <label for="password">Password</label>
+				    <input type="password" class="form-control" id="password" placeholder="Contrase&ntilde;a"  th:field="*{password}">
+				  </div>
+				  
+				</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" id="login-btn">Ingresar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<div class="container">
+			<footer>
+
+			</footer>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			     $('#login-btn').bind("click",function(){
+			    	 $("#form-login").submit();
+			     });
+			});
+		</script>
+	</body>
+</html>
+
+
