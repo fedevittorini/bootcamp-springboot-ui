@@ -16,7 +16,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<openapi.version>1.6.4</openapi.version>
-		<mainclass>com.eduit.bootcamp.cart-ui.CartUiApplication</mainclass>
+		<mainclass>com.eduit.bootcamp.cartui.CartUiApplication</mainclass>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -72,6 +72,10 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
+		<dependency>
+	        <groupId>io.rest-assured</groupId>
+	        <artifactId>rest-assured</artifactId>
+	    </dependency>
 		
 		<dependency>
 			<groupId>junit</groupId>
@@ -106,19 +110,62 @@
 			    <version>6.0.0</version>
 			    <executions>
 			        <execution>
+						<id>generate-client</id>
 			            <goals>
 			                <goal>generate</goal>
 			            </goals>
 			            <configuration>
 			                <inputSpec>${project.basedir}/src/main/resources/rest-contract.yaml</inputSpec>
 			                <generatorName>java</generatorName>
-			                <library>native</library>
+			                <library>resttemplate</library>
+			                <apiPackage>${project.groupId}.${project.artifactId}.api</apiPackage>
+			                <modelPackage>${project.groupId}.${project.artifactId}.model</modelPackage>
+			                <invokerPackage>${project.groupId}.${project.artifactId}</invokerPackage>
+			                <ignoreFileOverride>${project.basedir}/src/swagger/ignore</ignoreFileOverride>
 			                <serializationLibrary>jackson</serializationLibrary>
+			                <generateSupportingFiles>true</generateSupportingFiles>
+			                <legacyDiscriminatorBehavior>false</legacyDiscriminatorBehavior>
 			                <configOptions>
-								<annotationLibrary>swagger1</annotationLibrary>
 								<dateLibrary>java8</dateLibrary>
 			                	<sourceFolder>src/gen/java/main</sourceFolder>
 			                </configOptions>
+			            </configuration>
+			        </execution>
+			        <execution>
+						<id>generate-model</id>
+			            <goals>
+			                <goal>generate</goal>
+			            </goals>
+			            <configuration>
+			                <inputSpec>${project.basedir}/src/main/resources/rest-contract.yaml</inputSpec>
+			                <generatorName>spring</generatorName>
+			                <modelPackage>${project.groupId}.${project.artifactId}.model</modelPackage>
+                			<ignoreFileOverride>${project.basedir}/src/swagger/ignore</ignoreFileOverride>
+                			<generateApiDocumentation>false</generateApiDocumentation>
+                			<generateModelDocumentation>false</generateModelDocumentation>
+                			<generateSupportingFiles>false</generateSupportingFiles>
+                			<library>spring-boot</library>
+			                <configOptions>
+								<useSwaggerUI>false</useSwaggerUI>
+								<annotationLibrary>swagger2</annotationLibrary>
+								<dateLibrary>java8</dateLibrary>
+								<delegatePattern>false</delegatePattern>
+			                	<sourceFolder>src/gen/java/main</sourceFolder>
+			                </configOptions>
+			            </configuration>
+			        </execution>
+			        <execution>
+						<id>generate-jquery</id>
+			            <goals>
+			                <goal>generate</goal>
+			            </goals>
+			            <configuration>
+			                <inputSpec>${project.basedir}/src/main/resources/rest-contract.yaml</inputSpec>
+			                <generatorName>javascript</generatorName>
+			                <apiPackage>${project.groupId}.${project.artifactId}.api</apiPackage>
+			                <modelPackage>${project.groupId}.${project.artifactId}.model</modelPackage>
+			                <invokerPackage>${project.groupId}.${project.artifactId}</invokerPackage>
+			                <output>${project.basedir}/src/main/resources/static/js</output>
 			            </configuration>
 			        </execution>
 			    </executions>
